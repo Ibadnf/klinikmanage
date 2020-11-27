@@ -16,5 +16,9 @@ def create_app():
     from app.views.auths import bp as auth
     app.register_blueprint(auth)
 
+    # test only
+    @app.route('/', methods=['GET'])
+    def index():
+        return 'Hello my bos...'
 
     return app
