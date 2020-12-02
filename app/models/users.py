@@ -10,6 +10,5 @@ class UsersModel(db.Model):
     email = db.Column(db.String(128), unique=True, nullable=False)
     password = db.Column(db.String(512),nullable=False)
 
-
     def __repr(self):
         return f"<Users {self.full_name}>"
