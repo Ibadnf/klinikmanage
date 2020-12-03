@@ -1,86 +1,69 @@
+{% extends 'index.html' %}
 
-    {% for message in get_flashed_messages() %}
-      <div class="alert alert-warning">
-        <button
-          type="button"
-          class="close"
-          data-dismiss="alert">
-          x
-        </button>
-        {{ message }}
+{% block content %}
+<div class="container">
+
+  <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+          <!-- Nested Row within Card Body -->
+          <div class="row">
+              <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+              <div class="col-lg-7">
+                  <div class="p-5">
+                      <div class="text-center">
+                          <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                      </div>
+                      <div class="col py-3 px-lg-5">
+                        {% for message in get_flashed_messages() %}
+                        <div class="alert alert-warning">
+                        <button
+                        type="button"
+                        class="close"
+                        data-dismiss="alert">
+                        x
+                        </button>
+                        {{ message }}
+                        {% endfor %}
+                      </div>
+                      <form class="user" method="POST" action="{{ url_for('auth.register') }}">
+                          {{ form.csrf_token }}
+                          <div class="form-group">
+                            {{ form.username(class_="form-control form-control-user", placeholder="Username") }}
+                          </div>
+                          
+                          <div class="form-group">
+                            {{ form.full_name(class_="form-control form-control-user", placeholder="Full Name") }}
+                          </div>
+
+                          <div class="form-group">
+                            {{ form.email(class_="form-control form-control-user", placeholder="Email") }}
+                          </div>
+
+                          <div class="form-group row">
+                              <div class="col-sm-6 mb-3 mb-sm-0">
+                                {{ form.password(class_="form-control form-control-user", placeholder="Password") }}
+                              </div>
+                              <div class="col-sm-6">
+                                {{ form.confirm_password(class_="form-control form-control-user", placeholder="Retype Password") }}
+                              </div>
+                          </div>
+                          <button class="btn btn-primary btn-user btn-block">
+                              Register Account
+                          </button>
+                      </form>
+                      <hr>
+                      <div class="text-center">
+                          <a class="small" href="forgot-password.html">Forgot Password?</a>
+                      </div>
+                      <div class="text-center">
+                          <a class="small" href="{{ url_for('auth.login') }}">Already have an account? Login!</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
       </div>
-    {% endfor %}
-
-    <h1>Register</h1>
-
-    <form method="POST" action="/register">
-      {{ form.csrf_token }}
-
-      <fieldset class="name">
-        {{ form.username.label }}
-        {{ form.username(placeholder='Username') }}
-        {% if form.username.errors %}
-          <ul class="errors">
-            {% for error in form.username.errors %}
-              <li>{{ error }}</li>{% endfor %}
-          </ul>
-        {% endif %}
-      </fieldset>
-
-      <fieldset class="name">
-        {{ form.full_name.label }}
-        {{ form.full_name(placeholder='Username') }}
-        {% if form.full_name.errors %}
-          <ul class="errors">
-            {% for error in form.full_username.errors %}
-              <li>{{ error }}</li>{% endfor %}
-          </ul>
-        {% endif %}
-      </fieldset>
-
-      <fieldset class="email">
-        {{ form.email.label }}
-        {{ form.email(placeholder='youremail@example.com') }}
-        {% if form.email.errors %}
-          <ul class="errors">
-            {% for error in form.email.errors %}
-              <li>{{ error }}</li>{% endfor %}
-          </ul>
-        {% endif %}
-      </fieldset>
-
-      <fieldset class="password">
-        {{ form.password.label }}
-        {{ form.password }}
-        {% if form.password.errors %}
-          <ul class="errors">
-            {% for error in form.password.errors %}
-              <li>{{ error }}</li>{% endfor %}
-          </ul>
-        {% endif %}
-      </fieldset>
-
-      <fieldset class="confirm">
-        {{ form.confirm_password.label }}
-        {{ form.confirm_password }}
-        {% if form.confirm_password.errors %}
-          <ul class="errors">
-            {% for error in form.confirm_password.errors %}
-              <li>{{ error }}</li>{% endfor %}
-          </ul>
-        {% endif %}
-      </fieldset>
-
-      <div class="submit-button">
-        {{ form.submit }}
-      </div>
-
-    </form>
-
-    <div class="login-signup">
-      <div>
-        <span>Already have an account?</span>
-        <a href="{{ url_for('auth.login') }}">Log in.</a>
-      </div>
-    </div>
   </div>
+
+</div>
+
+{% endblock %}

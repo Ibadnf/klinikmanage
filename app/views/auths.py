@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import LoginManager, login_user, current_user, login_required, logout_user, UserMixin
+
 from app.forms.registers import RegisterForm
 from app.forms.login import LoginForm
 from app.models.users import UsersModel
@@ -23,9 +25,10 @@ def register():
 
         db.session.add(user)
         db.session.commit()
+        flash('Thanks for registering')
         return redirect(url_for('auth.login'))
 
-    return render_template('auths/register.html', form=form)
+    return render_template('/auths/register.html', form=form)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -35,10 +38,12 @@ def login():
     if form.validate_on_submit():   
         user_object = UsersModel.query.filter_by(email=form.email.data).first()
         login_user(user_object)
-        return redirect(url_for('index'))
+        return redirect(url_for('main.dashboard'))
 
-    return render_template('auths/login.html', form=form)
+    return render_template('/auths/login.html', form=form)
 
-@auth.route('/logout')
+@auth.route("/logout")
+@login_required
 def logout():
+    logout_user()
     return redirect(url_for('index'))
