@@ -4,9 +4,8 @@ class PatientsModel(db.Model):
     __tablename__ = 'patients'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), unique=True, nullable=False)
     full_name = db.Column(db.String(128), nullable=False)
-    no_ktp = db.Column(db.String(64), nullable=False)
+    no_ktp = db.Column(db.String(64), unique=True, nullable=False)
     tempat_lahir = db.Column(db.String(64), nullable=False)
     tgl_lahir = db.Column(db.Date, nullable=False)
     sex = db.Column(db.Boolean, nullable=False)

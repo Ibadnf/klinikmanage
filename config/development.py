@@ -11,4 +11,7 @@ class Development(Config):
     SQLALCHEMY_DATABASE_URI = f"postgresql://{os.environ['DB_USERNAME']}:{os.environ['DB_PASSWORD']}@{os.environ['DB_HOST']}:{os.environ['DB_PORT']}/{os.environ['DB_NAME']}"
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     SQLALCHEMY_ECHO = True
+    RECAPTCHA_PUBLIC_KEY = 'public'
+    RECAPTCHA_PRIVATE_KEY = 'private'
+    RECAPTCHA_DATA_ATTRS = {'theme': 'dark'}
 
