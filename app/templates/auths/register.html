@@ -29,22 +29,37 @@
                           {{ form.csrf_token }}
                           <div class="form-group">
                             {{ form.username(class_="form-control form-control-user", placeholder="Username") }}
+                            {% for error in form.username.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
                           </div>
                           
                           <div class="form-group">
                             {{ form.full_name(class_="form-control form-control-user", placeholder="Full Name") }}
+                            {% for error in form.full_name.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
                           </div>
 
                           <div class="form-group">
                             {{ form.email(class_="form-control form-control-user", placeholder="Email") }}
+                            {% for error in form.email.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
                           </div>
 
                           <div class="form-group row">
                               <div class="col-sm-6 mb-3 mb-sm-0">
                                 {{ form.password(class_="form-control form-control-user", placeholder="Password") }}
+                                {% for error in form.password.errors %}
+                                <span style="color: red;">[{{ error }}]</span>
+                                {% endfor %}
                               </div>
                               <div class="col-sm-6">
                                 {{ form.confirm_password(class_="form-control form-control-user", placeholder="Retype Password") }}
+                                {% for error in form.confirm_password.errors %}
+                                <span style="color: red;">[{{ error }}]</span>
+                                {% endfor %}
                               </div>
                           </div>
                           <button class="btn btn-primary btn-user btn-block">

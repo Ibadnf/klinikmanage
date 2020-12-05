@@ -10,10 +10,11 @@ def create_app():
 
     login = LoginManager(app)
     login.init_app(app)
+    login.login_view = 'auth.login'
     
     @login.user_loader
-    def get_user(ident):
-        return UsersModel.query.get(int(ident))
+    def load_user(id):
+        return UsersModel.query.get(int(id))
 
     # config
     app.config.from_object(os.environ['APP_CONFIG_FILE'])
@@ -31,7 +32,9 @@ def create_app():
 
     @app.route('/', methods=['GET'])
     def index():
-        if not current_user.is_authenticated:
+        if current_user.is_authenticated:
+            return redirect(url_for('main.dashboard'))
+        else:
     	    flash('Please login!', 'danger')
     	    return redirect(url_for('auth.login'))
 

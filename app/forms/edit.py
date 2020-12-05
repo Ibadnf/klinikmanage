@@ -4,7 +4,7 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from flask_wtf import FlaskForm, RecaptchaField
 from app.models.users import UsersModel
 
-class RegisterForm(FlaskForm):
+class EditProfileForm(FlaskForm):
     username = StringField('Username', [
         validators.InputRequired(message='Username Required')
         ])
